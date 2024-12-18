@@ -1,12 +1,19 @@
 import os
 
 
+
+
+from ftfy import fix_text
+
 def load_data(path):
     """
-    Load dataset
+    Charger et corriger les données pour respecter les accents français.
     """
     input_file = os.path.join(path)
-    with open(input_file, "r") as f:
+    with open(input_file, "r", encoding="utf-8") as f:
         data = f.read()
-
-    return data.split('\n')
+    
+    # Réparer les anomalies d'encodage
+    data = fix_text(data)
+    
+    return data.split("\n")
